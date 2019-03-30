@@ -1,0 +1,108 @@
+\documentclass[11pt]{article}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\thispagestyle{empty}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.3cm plus4mm minus3mm}
+\oddsidemargin = 0.0in
+\textwidth = 6.5 in
+\textheight = 9 in
+\headsep = 0in
+
+\title{CSCI 4100 Fall 2018 \\
+% enter assignment number
+Assignment 8 Answers}
+\author{Damin Xu\\661679187}
+
+
+
+\begin{document}
+\maketitle
+% enter question #
+\noindent{\bf Exercise 4.3}
+\begin{enumerate} [(a)]
+	\item As the complexity of $f$ increase, and $H$ is unchanged, the deterministic noise increases, and the tendency to overfitting will decrease.
+
+	\item As the complexity of $H$ decrease, and $f$ is unchanged, the deterministic noise decrease, and because $H$ is going to be more complex than $f$ the tendency to overfitting will increase.
+\end{enumerate}
+\newpage
+
+\noindent{\bf Exercise 4.5}
+\begin{enumerate} [(a)]
+	\item We already know that $\sum^{Q}_{q=0}w^2_q=w^Tw$, so we need to let $w^T\Gamma^T\Gamma w = w^Tw$, because $I^T=I$ and $w\times I= I\times w =w$, so $\Gamma = I$.
+
+	\item Here we want $w^T\Gamma^T\Gamma w = (w^Tw)^2$, than $\Gamma \times w = \begin{bmatrix}
+\sum^{Q}_{q=0}w^2_q \\
+0 \\
+... \\
+0 
+\end{bmatrix}$, So $\Gamma=\begin{bmatrix}
+1 & 1 & ... & 1 \\
+0 & 0 & ... & 0 \\
+ & ... & ... &  \\
+0 & 0 & 0 & 0 
+\end{bmatrix}$
+\end{enumerate}
+\newpage
+\noindent{\bf Exercise 4.6} \ \\
+The hard-order constraint is be better than the soft-order constraint for binary classification using perceptron model.\\\\
+
+The hard-order constraint count some weight as 0, so this must have some effect on $E_{in}$.\\\\
+For the soft-order constraint, it constraint $w^Tw\leq C$, so $E_{in}(w)=\sum^n_{i=1}[sign(w^Tx_i)\neq y_i]+w^Tw, where w^Tw\leq C$.\\\\
+With out constraint, $E'_{in}(w)=\sum^n_{i=1}[sign(w^Tx_i)\neq y_i]$, and let the best weight for this problem be $w'$, than $E_{in}(w')=min(E_{in}(w))$ and $E'_{in}(w')=min(E'_{in}(w))$.\\\\
+So, for a constant a, $E_{in}(aw')=E'{in}(aw')+(aw')T(aw') = E'_{in}(w')+||aw'||^2$.\\\\
+Clearly, when a is very small, $E_{in}(aw')\approx E'_{in}(w')$, and soft-order constraint has no effect.\\\\
+Therefore, the hard-order constraint is better.
+
+\newpage
+
+\noindent{\bf Exercise 4.7}
+\begin{enumerate} [(a)]
+	\item Because $E_{val}(g^{-})=\frac{1}{K}\sum_{x_n\in D_{val}}e(g^{-}(x_n),y_n)$,
+	\[
+	\begin{aligned}
+		\sigma^2_{val} &= VAR_{D_{train}}[E_{val}(g^{-})]\\
+		&= VAR_{D_{train}}[\frac{1}{K}\sum_{x_n\in D_{val}}e(g^{-}(x_n),y_n)]\\
+		&= \frac{1}{K^2}\sum_{x_n \in D_{val}}VAR_{x_n}e(g^{-}(x_n),y_N)\\
+		&= \frac{1}{K^2}K\sigma^2(g^{-})\\
+		&= \frac{1}{K}\sigma^2(g^{-})
+	\end{aligned}
+	\]
+
+	\item If $g^{-}(x) = y, e(g^{-}(x),y)=1$, else $e(g^{-}(x),y) = 0$.\\
+	So $E[x][e(g^{-}(x),y)] = P[g^{-}(x)\neq y]$.\\
+	\[
+	\begin{aligned}
+		\sigma^2_{g^{-}} &= VAR_x[e(g^{-}(x),y)]\\
+		&= E[x][(e(g^{-}(x),y)-E[x][e(g^{-}(x),y)])^2]\\
+		&= E[x][(e(g^{-}(x),y)-P[g^{-}(x)\neq y])^2]\\
+		&= (1-P[g^{-}(x)\neq y])\times P[g^{-}(x)\neq y]
+	\end{aligned}
+	\]
+
+	\item From part (a) and (b), $\sigma^2_{val}=\frac{1}{K}(1-P[g^{-}(x)\neq y])\times P[g^{-}(x)\neq y]$.\\
+	Because $(1-x)x\leq\frac{1}{4}$, so \[
+	\sigma^2_{val}=\frac{1}{K}(1-P[g^{-}(x)\neq y])\times P[g^{-}(x)\neq y]\leq \frac{1}{K}\times \frac{1}{4}=\frac{1}{4K}
+	\]
+
+	\item There is not any upper bound for $Var[E_{val}(g^{-})]$
+
+	\item $\sigma^2(g^{-})$ is expected to be higher.
+
+	\item In some range, the increase of K decreases $E_{out}$, and out of the range, increase of K increases $E_{out}$.
+
+\end{enumerate}
+
+\newpage
+
+\noindent{\bf Exercise 4.8}\ \\
+Because $E_m = E_{val}(g^{-}_m)$, \[
+	E_{D_{val}}(E_m)=E_{D_{val}}(E_{val}(g{-}_m))=E_{out}(g{-}_m)
+\]
+So $E_m$ is an unbiased estimate for $E_{out}(g^{-}_m)$
+
+\end{document}
+\end{document}

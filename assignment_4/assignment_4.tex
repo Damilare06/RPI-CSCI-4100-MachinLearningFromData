@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\thispagestyle{empty}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.3cm plus4mm minus3mm}
+\oddsidemargin = 0.0in
+\textwidth = 6.5 in
+\textheight = 9 in
+\headsep = 0in
+
+\title{CSCI 4100 Fall 2018 \\
+% enter assignment number
+Assignment 4 Answers}
+\author{Damin Xu\\661679187}
+
+\begin{document}
+\maketitle
+% enter question #
+\noindent{\bf Exercise 2.4}
+\begin{enumerate} [(a)]
+	\item First build a $(d+1)\times(d+1)$ matrix:\\
+	$M = \begin{bmatrix}
+		1^0 & 1^1 & 1^2 & ... & 1^d \\
+		2^0 & 2^1 & 2^2 & ... & 2^d \\
+		3^0 & 3^1 & 3^2 & ... & 3^d \\
+		 &  & ... &  &  \\
+		(d+1)^0 & (d+1)^1 & (d+1)^2 & ... & (d+1)^d 
+	\end{bmatrix} =
+	 \begin{bmatrix}
+		1 & 1 & 1^2 & ... & 1^d \\
+		1 & 2 & 2^2 & ... & 2^d \\
+		1 & 3 & 3^2 & ... & 3^d \\
+		 &  & ... &  &  \\
+		1 & (d+1) & (d+1)^2 & ... & (d+1)^d 
+	\end{bmatrix} $\\\\
+	Such matrix $M$ is a kind of Vandermonde determinant.\\
+	Because the value of Vandermonde determinant cannot be 0, the system\\\\
+	$M\times \begin{bmatrix}
+		x_1 \\
+		x_2 \\
+		x_3 \\
+		... \\
+		x_{(d+1)} 
+	\end{bmatrix}  = \begin{bmatrix}
+		y_1 \\
+		y_2 \\
+		y_4 \\
+		... \\
+		y_{d+1} 
+	\end{bmatrix} $  will always have solutions.\\
+	So $(d+1)$ points can always be shattered, and it is true that $d_{vc}\geq d+1$.
+
+	\item Suppose any point in a set of $(d+2)$ pints $X$ can be reprense as a vector of length $(d+1)$: $[x_1,x_2,x_3,...,x_{d+1}]$.\\
+	Then any $(d+2)$ vector of length $(d+1)$ have to be linear dependent, which means: \[x_j=\sum_{i\neq j}a_i\times x_i\] and not all $a_i=0$\\
+	Then construct a dichotomy that cannot be generated:\\\[
+		y = \begin{cases}
+		sign(a_i),& \text{if } i\neq j\\
+		-1,& \text{if } i=j
+		\end{cases}
+	\]
+	For all $i\neq j$, assume the labes are correct:\[
+	sign(a_i)=sign(w^Tx_i)\Rightarrow a_iw^Tx_i>0
+	\]
+	For j$^{th}$ data, $w^Tx_j=\sum_i\neq a_iw^Tx_i>0$, and $y_j=1$ and $y_j\neq -1$.\\
+	Thus no set of $d+2$ points in $X$ can be shattered by the perceptron, and $d_vc\leq d+1$.
+\end{enumerate}
+\newpage
+\noindent{\bf Problem 2.3}
+\begin{enumerate} [(a)]
+	\item From exercise 2.1 (a), we know for positive ray, $m_H(N)=N+1$. Then for negative rays, $m_H(N)=N-1$. Combine these two situations, we get $m_H(N)=N+1+N-1=2=2N$.\\\\
+	So, $d_{vc}=2$ because $m_H(3)=6<2^3$
+
+	\item From exercise 2.1 (b), we know for positive interval, $m_H(N)=\frac{N^2}{2}+\frac{N}{2}+1$. If negative intervals are counted too, for the case $N > 2$: we can simply get $m_H(H)$ by double the growth function for positive interval and minus the growth function for positive or negative rays because this part is count twice.\\
+	So,\[
+		m_H(N)=2(\frac{N^2}{2}+\frac{N}{2}+1)-2N=N^2-N+2\text{ for }N>2
+	\]
+	And if $N=1\ or\ 2$, the groth function is the same as positive intervals.
+	Thus, \[
+		m_H(N) = \begin{cases}
+		\frac{N^2}{2}+\frac{N}{2}+1,& \text{if } N\leq2\\
+		N^2-N+2,& \text{if } N>2\\
+		\end{cases}
+	\]
+
+
+	So $d_{vc}=3$ because $m_H(4)=14<2^4$
+
+	\item Since they $H$ contains the functions which are +1 in the sphere, there are two situations: first is +1 in sphere and -1 outside; and the other is there is only -1 out of the sphere but no +1.\\
+	\\It is similar to the positive intervals, so\[
+		m_H(N)=\frac{N(N+1)}{2}+1
+	\]
+	So $d_{vc}=2$ because $m_H(3)=7<2^3$
+\end{enumerate}
+
+
+\newpage
+\noindent{\bf Problem 2.8}\\
+Because $m_H(N)\leq 2^N$, then $m_H(N)$ is either infinite and equal to $2^N$ or is finite and bounded by a polynomial.
+Therefore, $2^N$ is a possible growth function $m_H(N)$ because it is the upper bound of $m_H(N)\leq 2^N$;\\
+$1+N$,$1+N+\frac{N(N-1)}{2}$ and $1+N+\frac{N(N-1)(N-2)}{6}$ are possible growth functions $m_H(N)$ becasue they are all polynominals, and snaller than $2^N$.
+\\
+\\
+\noindent{\bf Problem 2.10}\\
+First assume $m_H(N)=x$.\\\\
+Suppose there are $2N$ points, and seperate these $2N$ points into 2 sets of $N$ points. Clearly, each set of $N$ points can produce no more than $x$ dichotomies, so\[m_H(2N)=m_H(N+N)\leq x\times x\]
+which means,\[
+m_H(2N)\leq m_H(N)^2
+\]
+\\
+Also because $E_{out}(g)\leq E_{in}(g)+\sqrt{\frac{8}{N}\text{ln}\frac{4m_H(2N)}{\delta}}$, and $m_H(2N)\leq m_H(N)^2$,
+it is clearly\[
+E_{out}(g)\leq E_{in}(g)+\sqrt{\frac{8}{N}\text{ln}\frac{4m_H(N)^2}{\delta}}
+\]
+\\
+\\
+\noindent{\bf Problem 2.12}\\
+\[
+E_{out}(g)\leq E_{in}(g)+\sqrt{\frac{8}{N}\text{ln}\frac{4((2N)^{d_{vc}}+1)}{\delta}}
+\]
+Since $d_{vc}=10$, confidence = 95\%($\delta =0.05$), generalization error at most 0.05
+\[
+\sqrt{\frac{8}{N}\text{ln}\frac{4((2N)^{10}+1)}{0.05}} \leq 0.05
+\]
+Sovle the inequality by iterating from $N = 1$:
+ $N\leq 452957$\\
+So the sample size is 452957.
+
+\newpage
+
+
+\end{document}
+\end{document}

@@ -1,0 +1,17 @@
+Problem 1
+	Dimension of Z after 8th order transformation is 300*45
+
+Problem 2
+	There is overfitting.
+
+Problem 3
+	There is underfitting.
+
+Problem 4
+	When Ecv is the minimum, Etest is almost the minimum. So Ecv indicates the best lambda which causes a relatively very small Etest.
+
+Problem 5
+	The best lambda is 0.6 with the minimum Ecv 0.1234595712558882
+
+Problem 6
+	Estimate Eout is 0.04369582273096729.
